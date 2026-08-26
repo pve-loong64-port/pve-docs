@@ -1476,6 +1476,40 @@ tag (name used to mount the device on the guest).
 For more information on available virtiofsd parameters, see the
 https://gitlab.com/virtio-fs/virtiofsd[GitLab virtiofsd project page].
 
+[[qm_pvpanic]]
+Pvpanic
+~~~~~~~
+
+Pvpanic is a device to send system panic events to QEMU. It allows to
+provide extra VM status and perform the specified panic action when the VM
+system crashes.
+
+To add a pvpanic device run the following command:
+
+----
+qm set <vmid> -pvpanic enabled=1[,action=<action>]
+----
+
+A panic action can be specified to perform when the VM system crashes. Available
+panic actions are:
+
+* `none`: Continue VM execution
+* `pause`: Pause the VM
+* `shutdown`: Shutdown the VM and exit, according to the shutdown action
+* `exit-failure`: Shutdown the VM and exit with non-zero status
+
+NOTE: The default panic action is `shutdown`.
+
+NOTE: VMs managed by the HA stack can set `exit-failure` to exit the QEMU
+process completely and let the HA stack start it again.
+
+Linux VMs with kernel >=5.2 support pvpanic PCI device by default.
+
+Windows VMs require https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers[Windows
+VirtIO Drivers] to use pvpanic.
+
+FreeBSD VMs do not support pvpanic.
+
 [[qm_bootorder]]
 Device Boot Order
 ~~~~~~~~~~~~~~~~~
