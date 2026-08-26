@@ -1476,6 +1476,28 @@ tag (name used to mount the device on the guest).
 For more information on available virtiofsd parameters, see the
 https://gitlab.com/virtio-fs/virtiofsd[GitLab virtiofsd project page].
 
+[[qm_pvpanic]]
+Pvpanic
+~~~~~~~
+
+Pvpanic is a device to send system panic events to QEMU. It allows to
+provide extra VM status when the VM system crashes.
+
+To add a pvpanic PCI device run the following command:
+
+----
+qm set <vmid> -pvpanic 1
+----
+
+Linux VMs with kernel >=5.2 support pvpanic PCI device by default
+(https://www.kernelconfig.io/CONFIG_PVPANIC_PCI[pvpanic PCI driver]).
+
+Windows VMs require
+https://github.com/virtio-win/kvm-guest-drivers-windows/[kvm-guest-drivers-windows]
+to use pvpanic.
+
+FreeBSD VMs do not support pvpanic.
+
 [[qm_bootorder]]
 Device Boot Order
 ~~~~~~~~~~~~~~~~~
