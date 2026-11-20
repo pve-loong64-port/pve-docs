@@ -128,7 +128,7 @@ pve-admin-guide.html: $(PVE_ADMIN_GUIDE_ADOCDEPENDS)
 pve-admin-guide.chunked: $(PVE_ADMIN_GUIDE_ADOCDEPENDS)
 	rm -rf $@.tmp $@
 	mkdir $@.tmp
-	a2x -D $@.tmp -a docinfo -a docinfo1 -a icons -f chunked pve-admin-guide.adoc
+	a2x -L -D $@.tmp -a docinfo -a docinfo1 -a icons -f chunked pve-admin-guide.adoc
 	mv $@.tmp/$@ $@
 
 PVE_DOCBOOK_CONF=-b $(shell pwd)/asciidoc/pve-docbook -f asciidoc/asciidoc-pve.conf
@@ -148,7 +148,7 @@ pve-admin-guide.pdf: $(PVE_ADMIN_GUIDE_ADOCDEPENDS) docinfo.xml pve-admin-guide-
 pve-admin-guide.epub: $(PVE_ADMIN_GUIDE_ADOCDEPENDS)
 	rm -rf $@.tmp $@
 	mkdir $@.tmp
-	a2x -D $@.tmp -f epub --asciidoc-opts="$(PVE_DOCBOOK_CONF)" pve-admin-guide.adoc
+	a2x -L -D $@.tmp -f epub --asciidoc-opts="$(PVE_DOCBOOK_CONF)" pve-admin-guide.adoc
 	mv $@.tmp/$@ $@
 
 api-viewer/apidata.js: scripts/extractapi.pl
